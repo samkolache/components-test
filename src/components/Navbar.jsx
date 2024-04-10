@@ -12,6 +12,9 @@ const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isFlyOpen, setFlyOpen] = useState(false)
+    const [isMegaOpen, setMegaOpen] = useState(false)
+
+    //function that opens nav item and closes other item
 
     return (
         <>
@@ -24,7 +27,10 @@ const Navbar = () => {
                         </a>
                     </div>
                     <div className='hidden md:flex text-black space-x-3'>
-                        <a href="#" className='py-5 px-2 hover:text-gray-600'>About Us</a>
+                        <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => setMegaOpen(!isMegaOpen)}>
+                            About Us
+                            <img src={Dropdown} className='w-5 cursor-pointer'/>
+                        </a>
                         <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => setFlyOpen(!isFlyOpen)}>
                             Products
                             <img src={Dropdown} className='w-5 cursor-pointer'/>
@@ -57,7 +63,7 @@ const Navbar = () => {
                 </div>
             )}
             {isFlyOpen && <FlyOut />}
-            <MegaMenu />
+            {isMegaOpen && <MegaMenu />}
         </nav>
 
         </>
@@ -111,16 +117,45 @@ const FlyOutItem = ( {src, title, desc}) => {
 
 const MegaMenu = () => {
     return(
-        <div className='w-screen max-h-lg  bg-white  shadow-lg border-solid border-2 absolute left-1/2 
-        transform -translate-x-1/2 z-10 md:block hidden '>
-            <div className='p-4 space-y-3'>
-                <p>Hello</p>
-                <p>Hello</p>
-                <p>Hello</p>
-                <p>Hello</p>
+        <div className='w-screen bg-white  shadow-lg border-solid border-2 absolute left-1/2 
+        transform -translate-x-1/2 z-10 md:block hidden'>
+            <div className='p-4 flex flex-row items-center justify-center gap-6'>
+                <MegaMenuItem 
+                    src={Visual}
+                    title='What we Do'
+                    desc = "Learn what makes us unique"
+                />
+                <MegaMenuItem 
+                    src={Visual}
+                    title='Our Mission'
+                    desc = "Represent your data in a way you can see"
+                />
+                <MegaMenuItem 
+                    src={Visual}
+                    title='Future Projects'
+                    desc = "Represent your data in a way you can see"
+                />
+                <MegaMenuItem 
+                    src={Visual}
+                    title='How you can help'
+                    desc = "Represent your data in a way you can see"
+                />
             </div>
         </div>
     )
 }
 
+const MegaMenuItem = ({src, title, desc}) => {
+    return(
+        <div className="flex flex-col items-start hover:bg-gray-100 rounded-lg p-3 cursor-pointer">
+            <div className='w-8 h-8 flex'>
+                <img src={src} alt='logo' className='w-6' />
+            </div>
+            <div>       
+                <h1 className="text-md font-bold">{title}</h1>
+                <p className="text-sm">{desc}</p>
+            </div>
+        </div>
+    )
+}
 export default Navbar;
