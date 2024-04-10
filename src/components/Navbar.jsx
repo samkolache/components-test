@@ -27,7 +27,7 @@ const Navbar = () => {
                         <a href="#" className='py-5 px-2 hover:text-gray-600'>About Us</a>
                         <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => setFlyOpen(!isFlyOpen)}>
                             Products
-                            <img src={Dropdown} className='w-5 cursor-pointer' onClick={() => setFlyOpen(!isFlyOpen)} />
+                            <img src={Dropdown} className='w-5 cursor-pointer'/>
                         </a>
                         <a href="#" className='py-5 px-2 hover:text-gray-600'>Blog</a>
                         <a href="#" className='py-5 px-2 hover:text-gray-600'>Contact Us</a>
@@ -38,7 +38,6 @@ const Navbar = () => {
                     <div className='md:hidden flex items-center text-white py-5'>
                     {!isOpen && <img src={Hamburger} alt='menu' className='w-8 cursor-pointer' onClick={() => setIsOpen(!isOpen)} />} 
                     {isOpen &&<img src={Close} alt='close' className='w-4 cursor-pointer' onClick={() => setIsOpen(!isOpen)} />}
-                        
                     </div>
                 </div>
             </div>
@@ -46,7 +45,9 @@ const Navbar = () => {
                 <div className='text-black md:hidden'>
                     <a href="#" className='block py-3 px-2 text-md text-center hover:text-gray-600'>About Us</a>
                     <hr className="my-3 h-0.5 w-1/2 border-t-0 bg-gray-300 mx-auto" />
-                    <a href="#" className='block py-3 px-2 hover:text-gray-600 text-md text-center'>Products</a>
+                    <a href="#" className='block py-3 px-2 hover:text-gray-600 text-md text-center'>
+                        Products
+                    </a>
                     <hr className="my-3 h-0.5 w-1/2 border-t-0 bg-gray-300 mx-auto" />
                     <a href="#" className='block py-3 px-2 hover:text-gray-600 text-md text-center'>Blog</a>
                     <hr className="my-3 h-0.5 w-1/2 border-t-0 bg-gray-300 mx-auto" />
@@ -56,6 +57,7 @@ const Navbar = () => {
                 </div>
             )}
             {isFlyOpen && <FlyOut />}
+            <MegaMenu />
         </nav>
 
         </>
@@ -65,7 +67,7 @@ const Navbar = () => {
 const FlyOut = () => {
     return(
         <div className='w-screen max-w-sm bg-white rounded-3xl shadow-lg border-solid border-2 absolute left-1/2 
-        transform -translate-x-1/2 z-10'>
+        transform -translate-x-1/2 z-10 md:block hidden '>
             <div className='p-4 space-y-3'>
                 <FlyOutItem
                     src = {IntegrationIcon}
@@ -92,6 +94,7 @@ const FlyOut = () => {
     )
 }
 
+
 const FlyOutItem = ( {src, title, desc}) => {
     return (
         <div className="flex items-center space-x-6 hover:bg-gray-100 rounded-lg p-3 cursor-pointer">
@@ -101,6 +104,20 @@ const FlyOutItem = ( {src, title, desc}) => {
             <div className='space-y-1'>       
                 <h1 className="text-md font-bold">{title}</h1>
                 <p className="text-sm">{desc}</p>
+            </div>
+        </div>
+    )
+}
+
+const MegaMenu = () => {
+    return(
+        <div className='w-screen max-h-lg  bg-white  shadow-lg border-solid border-2 absolute left-1/2 
+        transform -translate-x-1/2 z-10 md:block hidden '>
+            <div className='p-4 space-y-3'>
+                <p>Hello</p>
+                <p>Hello</p>
+                <p>Hello</p>
+                <p>Hello</p>
             </div>
         </div>
     )
