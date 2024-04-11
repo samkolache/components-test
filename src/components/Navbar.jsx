@@ -10,11 +10,19 @@ import {useState} from 'react'
 
 const Navbar = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [isFlyOpen, setFlyOpen] = useState(false)
-    const [isMegaOpen, setMegaOpen] = useState(false)
+    const [openMenu, setOpenMenu] = useState(null)
 
-    //function that opens nav item and closes other item
+    const handleMenuToggle = (menuName) => {
+        if(openMenu === menuName) {
+            setOpenMenu(null)
+        } else {
+            setOpenMenu(menuName)
+        }
+    }
+
+    //const [isOpen, setIsOpen] = useState(false);
+    //const [isFlyOpen, setFlyOpen] = useState(false)
+    //const [isMegaOpen, setMegaOpen] = useState(false)
 
     return (
         <>
@@ -27,11 +35,11 @@ const Navbar = () => {
                         </a>
                     </div>
                     <div className='hidden md:flex text-black space-x-3'>
-                        <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => setMegaOpen(!isMegaOpen)}>
+                        <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => handleMenuToggle('mega')}>
                             About Us
                             <img src={Dropdown} className='w-5 cursor-pointer'/>
                         </a>
-                        <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => setFlyOpen(!isFlyOpen)}>
+                        <a href="#" className='py-5 px-2 hover:text-gray-600 pr-1 flex items-center' onClick={() => handleMenuToggle('flyout')}>
                             Products
                             <img src={Dropdown} className='w-5 cursor-pointer'/>
                         </a>
@@ -42,12 +50,12 @@ const Navbar = () => {
                         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Call to Action</button>
                     </div>
                     <div className='md:hidden flex items-center text-white py-5'>
-                    {!isOpen && <img src={Hamburger} alt='menu' className='w-8 cursor-pointer' onClick={() => setIsOpen(!isOpen)} />} 
-                    {isOpen &&<img src={Close} alt='close' className='w-4 cursor-pointer' onClick={() => setIsOpen(!isOpen)} />}
+                    <img src={Hamburger} alt='menu' className='w-8 cursor-pointer' onClick={() => handleMenuToggle('flyout')} /> 
+                    <img src={Close} alt='close' className='w-4 cursor-pointer' onClick={() => handleMenuToggle()} />
                     </div>
                 </div>
             </div>
-            {isOpen && (
+            
                 <div className='text-black md:hidden'>
                     <a href="#" className='block py-3 px-2 text-md text-center hover:text-gray-600'>About Us</a>
                     <hr className="my-3 h-0.5 w-1/2 border-t-0 bg-gray-300 mx-auto" />
@@ -61,9 +69,8 @@ const Navbar = () => {
                     <hr className="my-3 h-0.5 w-1/2 border-t-0 bg-gray-300 mx-auto" />
                     <a href="#" className='block py-3 px-2 hover:text-gray-600 text-md text-center'>Log in</a>
                 </div>
-            )}
-            {isFlyOpen && <FlyOut />}
-            {isMegaOpen && <MegaMenu />}
+            {openMenu === 'flyout' && <FlyOut />}
+            {openMenu === 'mega' && <MegaMenu />}
         </nav>
 
         </>
